@@ -9,58 +9,48 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /* 设置背景图片 */
-            background-image: url('https://github.com/zhouruomiao/HCDIV-5/raw/main/imageA.jpg');
-            background-size: cover;  /* 图片覆盖整个页面 */
-            background-position: center;  /* 背景居中 */
-            background-repeat: no-repeat;  /* 防止背景图片重复 */
-            background-attachment: fixed;  /* 背景固定 */
+            background-color: #f4f4f4; /* 保持页面的背景色 */
         }
 
-        /* 设置一个透明的覆盖层来调整背景透明度 */
-        body::before {
+        /* 标题和介绍部分的样式 */
+        .hero {
+            background-image: url('https://github.com/zhouruomiao/HCDIV-5/raw/main/imageA.jpg');  /* 背景图片 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding: 40px;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);  /* 半透明黑色覆盖层，可以调整透明度 */
-            z-index: -1;  /* 确保背景图片在上面 */
+            background-color: rgba(0, 0, 0, 0.4);  /* 半透明的背景层 */
+            z-index: -1;
         }
 
-        header {
-            background-color: rgba(44, 62, 80, 0.7);  /* 半透明的背景色 */
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-
-        header h1 {
+        .hero h1 {
+            font-size: 3em;
             margin: 0;
-            font-size: 2.5em;
+            font-weight: bold;
         }
 
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 40px 0;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-        }
-
-        p {
+        .hero p {
             font-size: 1.2em;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
+        /* 其他部分的样式 */
         footer {
-            background-color: rgba(44, 62, 80, 0.7);  /* 半透明的背景色 */
+            background-color: #2c3e50;
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -72,18 +62,12 @@
 </head>
 <body>
 
-    <header>
+    <div class="hero">
         <h1>Musical Milestones: A Deep Dive into the Top 10,000 Spotify Songs</h1>
-    </header>
-
-    <div class="container">
-        <h2>Exploring the Evolution of Music</h2>
+        <p>Exploring the Evolution of Music</p>
         <p>Welcome to the world of musical milestones! This website offers a comprehensive exploration of the top 10,000 Spotify songs that have defined popular music from the 1950s to the present day. With songs spanning across genres, eras, and cultures, we aim to showcase the most iconic hits that have shaped the music landscape.</p>
         
         <p>Whether you're a music enthusiast, a researcher, or just curious about the history of chart-topping hits, this platform will provide you with a deeper understanding of musical trends and iconic artists.</p>
-
-        <h2>Join Us on This Musical Journey</h2>
-        <p>Discover the impact of these timeless tracks and explore how they’ve influenced the global music scene. From timeless classics to contemporary hits, let’s dive into the melodies that have become the soundtrack to our lives.</p>
     </div>
 
     <footer>
