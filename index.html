@@ -3,159 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who eats the food we grow?</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.css">
+    <title>Musical Milestones: A Deep Dive into the Top 10,000 Spotify Songs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
             margin: 0;
             padding: 0;
         }
-        .header {
-            background-color: #f8f9fa;
-            padding: 20px;
+
+        header {
+            background-color: #2c3e50;
+            color: #fff;
             text-align: center;
-        }
-        .section {
             padding: 20px;
         }
-        #map {
-            height: 500px;
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.8em;
             margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header">
-        <h1>Who eats the food we grow?</h1>
-        <p>Understanding global food production and consumption trends.</p>
+    <header>
+        <h1>Musical Milestones: A Deep Dive into the Top 10,000 Spotify Songs</h1>
+    </header>
+
+    <div class="container">
+        <h2>Exploring the Evolution of Music</h2>
+        <p>Welcome to the world of musical milestones! This website offers a comprehensive exploration of the top 10,000 Spotify songs that have defined popular music from the 1950s to the present day. With songs spanning across genres, eras, and cultures, we aim to showcase the most iconic hits that have shaped the music landscape.</p>
+        
+        <p>Whether you're a music enthusiast, a researcher, or just curious about the history of chart-topping hits, this platform will provide you with a deeper understanding of musical trends and iconic artists.</p>
+
+        <h2>Join Us on This Musical Journey</h2>
+        <p>Discover the impact of these timeless tracks and explore how they’ve influenced the global music scene. From timeless classics to contemporary hits, let’s dive into the melodies that have become the soundtrack to our lives.</p>
     </div>
 
-    <!-- Section 1: Global Food Production Insights -->
-    <div class="section">
-        <h2>Global Food Production Insights</h2>
-        <canvas id="foodVsFeedChart"></canvas>
-    </div>
+    <footer>
+        <p>&copy; 2024 Musical Milestones. All Rights Reserved.</p>
+    </footer>
 
-    <!-- Section 2: Fastest Growing Countries -->
-    <div class="section">
-        <h2>Fastest Growing Countries in Food Production</h2>
-        <canvas id="growthChart"></canvas>
-    </div>
-
-    <!-- Section 3: Regional Trends -->
-    <div class="section">
-        <h2>Regional Trends in Food Production</h2>
-        <canvas id="regionTrendsChart"></canvas>
-    </div>
-
-    <!-- Section 4: Food Production Anomalies -->
-    <div class="section">
-        <h2>Food Production Anomalies</h2>
-        <canvas id="anomaliesChart"></canvas>
-    </div>
-
-    <!-- Scripts -->
-    <script>
-        // Example Data (You need to replace it with actual data from your dataset)
-        const years = [1961, 1970, 1980, 1990, 2000, 2010];
-        const foodProduction = [100, 150, 200, 250, 300, 350]; // Example data for food
-        const feedProduction = [80, 120, 180, 230, 280, 330]; // Example data for feed
-
-        // 1. Food vs Feed Chart (Bar Chart)
-        const ctx1 = document.getElementById('foodVsFeedChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: years,
-                datasets: [
-                    {
-                        label: 'Food for Humans',
-                        data: foodProduction,
-                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Feed for Animals',
-                        data: feedProduction,
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: { beginAtZero: true },
-                    y: { beginAtZero: true }
-                }
-            }
-        });
-
-        // 2. Fastest Growing Countries Chart (Bar Chart)
-        const growthData = [50, 100, 150]; // Example data for growth rates of countries
-        const countries = ['Country A', 'Country B', 'Country C']; // Replace with actual country names
-
-        const ctx2 = document.getElementById('growthChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: countries,
-                datasets: [{
-                    label: 'Growth in Food Production (%)',
-                    data: growthData,
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            }
-        });
-
-        // 3. Regional Trends Chart (Stacked Area or Multi-Line Chart)
-        const regionData = [150, 170, 180, 190, 200, 210]; // Example data for regional trends
-        const ctx3 = document.getElementById('regionTrendsChart').getContext('2d');
-        new Chart(ctx3, {
-            type: 'line',
-            data: {
-                labels: years,
-                datasets: [{
-                    label: 'Food Production in Region A',
-                    data: regionData,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    fill: false
-                }]
-            }
-        });
-
-        // 4. Food Production Anomalies (Scatter Plot)
-        const anomaliesData = [250, 300, 350, 200, 400, 450]; // Example anomalies data
-        const ctx4 = document.getElementById('anomaliesChart').getContext('2d');
-        new Chart(ctx4, {
-            type: 'scatter',
-            data: {
-                datasets: [{
-                    label: 'Anomalies in Food Production',
-                    data: anomaliesData.map((value, index) => ({ x: years[index], y: value })),
-                    backgroundColor: 'rgba(255, 99, 132, 1)',
-                    borderColor: 'rgba(255, 99, 132, 0.5)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    x: { type: 'linear', position: 'bottom' },
-                    y: { beginAtZero: true }
-                }
-            }
-        });
-    </script>
 </body>
 </html>
-
