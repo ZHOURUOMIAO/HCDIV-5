@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who eats the food we grow?</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+        .section {
+            padding: 20px;
+        }
+        #map {
+            height: 500px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Who eats the food we grow?</h1>
+        <p>Understanding global food production and consumption trends.</p>
+    </div>
+
+    <!-- Section 1: Feeding the World in 2050 -->
+    <div class="section">
+        <h2>Feeding the World in 2050</h2>
+        <p>The world population is expected to grow from 7.3 billion today to 9.7 billion in 2050. This raises challenges for global food production and sustainability.</p>
+    </div>
+
+    <!-- Section 2: Global Food Production Insights -->
+    <div class="section">
+        <h2>Global Food Production Insights</h2>
+        <canvas id="foodVsFeedChart"></canvas>
+    </div>
+
+    <!-- Section 3: World Map -->
+    <div class="section">
+        <h2>World Food Production Distribution</h2>
+        <div id="map"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Chart.js Example
+        const ctx = document.getElementById('foodVsFeedChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['1961', '1970', '1980', '1990', '2000', '2010'], // Example years
+                datasets: [
+                    {
+                        label: 'Food for Humans',
+                        data: [100, 150, 200, 250, 300, 350], // Replace with real data
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Feed for Animals',
+                        data: [80, 120, 180, 230, 280, 330], // Replace with real data
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Leaflet Map Example
+        const map = L.map('map').setView([20, 0], 2); // Centered at latitude 20, longitude 0
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18
+        }).addTo(map);
+
+        // Example Marker (Replace with actual data)
+        L.marker([51.5, -0.09]).addTo(map).bindPopup('Food Production Example in Europe').openPopup();
+    </script>
+</body>
+</html>
