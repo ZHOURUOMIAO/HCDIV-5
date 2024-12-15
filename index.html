@@ -15,19 +15,7 @@
 
         /* 标题和介绍部分的样式 */
         .hero {
-            background-image: url('https://github.com/zhouruomiao/HCDIV-5/raw/main/IMG_01.jpg'); /* 使用库中的 IMG_01.jpg */
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            padding: 40px;
-            color: #fff;
-            text-align: center;
-            position: relative;
-        }
-
-        /* 标题和介绍部分的样式 */
-        .hero {
-            background-image: url('https://github.com/zhouruomiao/HCDIV-5/raw/main/IMG_01.jpg'); /* 背景图片 */
+            background-image: url('https://github.com/zhouruomiao/HCDIV-5/raw/main/IMG_03.jpg'); /* 使用库中的 IMG_03.jpg */
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -44,7 +32,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* 半透明的黑色遮罩 */
+            background-color: rgba(0, 0, 0, 0.3); /* 降低遮罩透明度为 0.3 */
             z-index: -1;
         }
 
@@ -52,12 +40,17 @@
             font-size: 3em;
             margin: 0;
             font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards; /* 淡入动画 */
         }
 
         .hero p {
             font-size: 1.2em;
             line-height: 1.6;
             margin-top: 20px;
+            opacity: 0;
+            animation: slideUp 2s ease-in-out forwards; /* 向上滑动淡入动画 */
+            animation-delay: 1s; /* 延迟 1 秒 */
         }
 
         /* 热力图容器样式 */
@@ -85,6 +78,27 @@
             position: fixed;
             bottom: 0;
             width: 100%;
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px); /* 向下偏移 20px */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* 回到原位置 */
+            }
         }
     </style>
 </head>
