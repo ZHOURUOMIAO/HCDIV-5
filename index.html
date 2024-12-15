@@ -10,20 +10,20 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4; /* 保持页面背景色 */
+            background-color: #f4f4f4;
         }
 
         /* 标题和介绍部分的样式 */
         .hero {
-            background-image: url('https://github.com/zhouruomiao/HCDIV-5/raw/main/1.png'); /* 背景图片 */
+            background-image: url('https://github.com/zhouruomiao/HCDIV-5/raw/main/1.png');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            padding: 60px 20px; /* 增加顶部和底部的内边距 */
+            padding: 60px 20px;
             color: #fff;
             text-align: center;
             position: relative;
-            min-height: 400px; /* 设置最小高度 */
+            min-height: 400px;
         }
 
         .hero::before {
@@ -33,51 +33,50 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.894); /* 提高遮罩透明度到 0.5 */
+            background-color: rgba(0, 0, 0, 0.894);
             z-index: -1;
         }
 
         .hero h1 {
             font-size: 2em;
-            margin: 0 0 40px 0; /* 增加底部间距 */
+            margin: 0 0 40px 0;
             font-weight: bold;
-            color: #fff; /* 纯白色 */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* 添加阴影 */
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
             opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards; /* 淡入动画 */
-            z-index: 2; /* 保证在最上层 */
+            animation: fadeIn 2s ease-in-out forwards;
+            z-index: 2;
         }
 
         .hero p {
             font-size: 1.2em;
             line-height: 1.6;
             margin-top: 20px;
-            color: #fff; /* 纯白色 */
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* 添加阴影 */
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
             opacity: 0;
-            animation: slideUp 2s ease-in-out forwards; /* 向上滑动淡入动画 */
-            animation-delay: 1s; /* 延迟 1 秒 */
-            z-index: 2;
-            max-width: 1000px; /* 限制宽度，确保与标题对齐 */
-            margin-left: auto; /* 居中显示 */
-            margin-right: auto; /* 居中显示 */
-            text-align: center; /* 居中对齐文字内容 */
+            animation: slideUp 2s ease-in-out forwards;
+            animation-delay: 1s;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
         }
 
         /* 小猫图片样式 */
         .cats {
             position: absolute;
-            bottom: 0; /* 使小猫固定在标题区域的最下方 */
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            display: flex; /* 横向排列 */
-            justify-content: center; /* 居中显示 */
-            gap: 10px; /* 小猫之间的间距 */
-            z-index: 2; /* 确保小猫显示在内容前 */
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 2;
         }
 
         .cats img {
-            height: 120px; /* 小猫高度 */
+            height: 120px;
             object-fit: contain;
         }
 
@@ -97,7 +96,6 @@
             margin-bottom: 20px;
         }
 
-        /* 页脚样式 */
         footer {
             background-color: #2c3e50;
             color: #fff;
@@ -108,7 +106,6 @@
             width: 100%;
         }
 
-        /* 动画效果 */
         @keyframes fadeIn {
             0% {
                 opacity: 0;
@@ -121,11 +118,11 @@
         @keyframes slideUp {
             0% {
                 opacity: 0;
-                transform: translateY(20px); /* 向下偏移 20px */
+                transform: translateY(20px);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0); /* 回到原位置 */
+                transform: translateY(0);
             }
         }
     </style>
@@ -136,7 +133,6 @@
         <h1>Musical Milestones: A Deep Dive into the Top 10,000 Spotify Songs</h1>
         <p>Exploring the Evolution of Music</p>
         <p>Welcome to the world of musical milestones! This website offers a comprehensive exploration of the top 10,000 Spotify songs that have defined popular music from the 1950s to the present day. With songs spanning across genres, eras, and cultures, we aim to showcase the most iconic hits that have shaped the music landscape.</p>
-        
         <p>Whether you're a music enthusiast, a researcher, or just curious about the history of chart-topping hits, this platform will provide you with a deeper understanding of musical trends and iconic artists.</p>
 
         <!-- 小猫图片横向排列 -->
@@ -160,7 +156,6 @@
     </footer>
 
     <script>
-        // 热力图代码
         const songs = [
             "Espresso", "Lover", "I've Tried E...", "Parachutes", "Starboy", 
             "After Hours", "Meteora", "I Don't Wann...", "Unorthodox j...", "Stick Season",
@@ -209,44 +204,19 @@
             .attr("y", d => yScale(d.song))
             .attr("width", width)
             .attr("height", yScale.bandwidth())
-            .attr("fill", d => colorScale(d.popularity));
+            .attr("fill", d => {
+                if (d.song === "After Hours") return colorScale(92.9); 
+                if (d.song === "Unorthodox j...") return colorScale(92.3);
+                if (d.song === "Hybrid Theor...") return colorScale(91.6);
+                return colorScale(d.popularity);
+            });
 
         svg.append("g")
             .call(d3.axisLeft(yScale).tickSize(0))
             .selectAll("text")
             .style("text-anchor", "end");
-
-        const legendHeight = height;
-        const legendWidth = 15;
-
-        const legendScale = d3.scaleLinear()
-            .domain([84, 94])
-            .range([legendHeight, 0]);
-
-        const legendAxis = d3.axisRight(legendScale).ticks(5);
-
-        const legend = svg.append("g")
-            .attr("transform", `translate(${width + 20}, 0)`);
-
-        legend.selectAll("rect")
-            .data(d3.range(0, legendHeight))
-            .enter()
-            .append("rect")
-            .attr("y", d => d)
-            .attr("x", 0)
-            .attr("width", legendWidth)
-            .attr("height", 1)
-            .style("fill", d => colorScale(legendScale.invert(d)));
-
-        legend.append("g")
-            .attr("transform", `translate(${legendWidth}, 0)`)
-            .call(legendAxis);
     </script>
 </body>
-</html>
-
-
-
 </html>
 
 
