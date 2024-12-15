@@ -215,6 +215,37 @@
             .call(d3.axisLeft(yScale).tickSize(0))
             .selectAll("text")
             .style("text-anchor", "end");
+        
+        // 添加颜色条（Color Legend）
+        const legendHeight = 300; // 颜色条高度
+        const legendWidth = 20;   // 颜色条宽度
+
+        const legendScale = d3.scaleLinear()
+            .domain([84, 94]) // 与颜色比例尺相同的范围
+            .range([legendHeight, 0]); // 映射到颜色条的高度
+
+        const legendAxis = d3.axisRight(legendScale)
+            .ticks(5) // 刻度数量
+            .tickFormat(d => d); // 格式化刻度值
+
+        const legend = svg.append("g")
+            .attr("transform", `translate(${width + 40}, 10)`); // 颜色条位置
+
+        // 绘制颜色条的渐变色块
+        legend.selectAll("rect")
+            .data(d3.range(0, legendHeight))
+            .enter()
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", d => d)
+            .attr("width", legendWidth)
+            .attr("height", 1)
+            .style("fill", d => colorScale(legendScale.invert(d)));
+
+        // 绘制颜色条的刻度
+        legend.append("g")
+            .attr("transform", `translate(${legendWidth}, 0)`)
+            .call(legendAxis);
     </script>
 </body>
 </html>
