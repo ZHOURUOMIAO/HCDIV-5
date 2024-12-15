@@ -217,8 +217,8 @@
             .style("text-anchor", "end");
         
        // 添加颜色条（Color Legend）
-        const legendHeight = 300; // 颜色条高度
-        const legendWidth = 20;   // 颜色条宽度
+        const legendHeight = height; // 颜色条高度与热力图对齐
+        const legendWidth = 20;      // 颜色条宽度
 
         const legendScale = d3.scaleLinear()
             .domain([84, 94]) // 与颜色比例尺相同的范围
@@ -229,7 +229,7 @@
             .tickFormat(d => d); // 格式化刻度值
 
         const legend = svg.append("g")
-            .attr("transform", `translate(${width + 40}, ${(height - legendHeight) / 2})`); // 调整颜色条垂直居中对齐
+            .attr("transform", `translate(${width + 30}, 0)`); // 调整颜色条与热力图右侧对齐
 
         // 绘制颜色条的渐变色块
         legend.selectAll("rect")
@@ -247,7 +247,7 @@
             .attr("transform", `translate(${legendWidth}, 0)`)
             .call(legendAxis)
             .selectAll("text")
-            .style("font-size", "10px"); // 缩小颜色条刻度字体大小
+            .style("font-size", "8px"); // 缩小颜色条刻度字体
     </script>
 </body>
 </html>
