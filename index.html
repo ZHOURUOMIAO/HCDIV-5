@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musical Milestones: A Deep Dive into the Top 10,000 Spotify Songs</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* 半透明的黑色遮罩，透明度从 0.4 增加到 0.6 */
+            background-color: rgba(0, 0, 0, 0.6); /* 半透明的黑色遮罩 */
             z-index: -1;
         }
 
@@ -46,6 +47,22 @@
             font-size: 1.2em;
             line-height: 1.6;
             margin-top: 20px;
+        }
+
+        /* 热力图容器样式 */
+        .heatmap-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .heatmap-container h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 20px;
         }
 
         /* 页脚样式 */
@@ -70,10 +87,106 @@
         <p>Whether you're a music enthusiast, a researcher, or just curious about the history of chart-topping hits, this platform will provide you with a deeper understanding of musical trends and iconic artists.</p>
     </div>
 
+    <!-- 热力图部分 -->
+    <div class="heatmap-container">
+        <h2>Top 50 Most Popular Albums Heatmap</h2>
+        <div id="heatmap"></div>
+    </div>
+
     <footer>
         <p>&copy; 2024 Musical Milestones. All Rights Reserved.</p>
     </footer>
 
+    <script>
+        // 热力图代码
+        const songs = [
+            "Espresso", "Lover", "I've Tried E...", "Parachutes", "Starboy", 
+            "After Hours", "Meteora", "I Don't Wann...", "Unorthodox j...", "Stick Season",
+            "Memories....D...", "Beautiful Th...", "Hybrid Theor...", "Unorthodox j...", 
+            "Dizzy up the...", "Unwritten", "The Eminem Show", "Ghost stories", 
+            "Viva La Vida...", "lovely (with...", "I'm Good (Blue)", "Hunting High...",
+            "FOUR (Deluxe)", "24K Magic", "Evolve", "TALKING IS HARD", 
+            "A Rush of Bl...", "➗(Deluxe)", "HIGHEST IN T...", "Oral Fixatio...", 
+            "Forever Young", "Rumours (sup...", "Songs From T...", "Back from the...", 
+            "Native", "Planet pit (...", "Black Panthe...", "Toto lv", "Save Me, San...", 
+            "Justice", "Back in Black", "Standing Nex...", "Toto", "DAMN.", 
+            "In The Zone", "Houdini", "Willy And Th...", "After Hours", 
+            "Doo-Wops & H...", "Hybrid Theor..."
+        ];
+
+        const data = songs.map((song, index) => ({
+            song: song,
+            popularity: 94 - index * 0.2 // 平滑递减
+        }));
+
+        const margin = { top: 20, right: 60, bottom: 20, left: 120 },
+              width = 600, // 图表宽度
+              height = 900; // 图表高度
+
+        const colorScale = d3.scaleSequential()
+            .domain([84, 94])
+            .interpolator(d3.interpolateYlGnBu);
+
+        const yScale = d3.scaleBand()
+            .domain(data.map(d => d.song))
+            .range([0, height])
+            .padding(0.05);
+
+        const svg = d3.select("#heatmap")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        svg.selectAll("rect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", d => yScale(d.song))
+            .attr("width", width)
+            .attr("height", yScale.bandwidth())
+            .attr("fill", d => {
+                if (d.song === "After Hours") return colorScale(92.9);     // 第6行颜色调整
+                if (d.song === "Unorthodox j...") return colorScale(92.3); // 第9行颜色调整
+                if (d.song === "Hybrid Theor...") return colorScale(91.6); // 第13行颜色调整
+                return colorScale(d.popularity); // 其他行默认颜色
+            });
+
+        svg.append("g")
+            .call(d3.axisLeft(yScale).tickSize(0))
+            .selectAll("text")
+            .style("text-anchor", "end");
+
+        const legendHeight = height;
+        const legendWidth = 15;
+
+        const legendScale = d3.scaleLinear()
+            .domain([84, 94])
+            .range([legendHeight, 0]);
+
+        const legendAxis = d3.axisRight(legendScale).ticks(5).tickFormat(d => d);
+
+        const legend = svg.append("g")
+            .attr("transform", `translate(${width + 20}, 0)`);
+
+        legend.selectAll("rect")
+            .data(d3.range(0, legendHeight))
+            .enter()
+            .append("rect")
+            .attr("y", d => d)
+            .attr("x", 0)
+            .attr("width", legendWidth)
+            .attr("height", 1)
+            .style("fill", d => colorScale(legendScale.invert(d)));
+
+        legend.append("g")
+            .attr("class", "legend")
+            .attr("transform", `translate(${legendWidth}, 0)`)
+            .call(legendAxis);
+    </script>
 </body>
 </html>
+
 
