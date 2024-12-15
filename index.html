@@ -211,12 +211,12 @@
                 return colorScale(d.popularity);
             });
 
-        svg.append("g")
+                svg.append("g")
             .call(d3.axisLeft(yScale).tickSize(0))
             .selectAll("text")
-            .style("text-anchor", "end");
-        
-       // 添加颜色条（Color Legend）
+            .style("font-size", "8px"); // 缩小 y 轴字体大小
+
+        // 添加颜色条（Color Legend）
         const legendHeight = height; // 颜色条高度与热力图对齐
         const legendWidth = 20;      // 颜色条宽度
 
@@ -248,6 +248,7 @@
             .call(legendAxis)
             .selectAll("text")
             .style("font-size", "8px"); // 缩小颜色条刻度字体
+
 
     </script>
 </body>
