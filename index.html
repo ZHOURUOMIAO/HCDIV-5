@@ -13,7 +13,6 @@
             background-color: #f4f4f4;
         }
 
-        /* 标题和介绍部分的样式 */
         .hero {
             background-image: url('https://github.com/zhouruomiao/HCDIV-5/raw/main/1.png');
             background-size: cover;
@@ -63,7 +62,6 @@
             text-align: center;
         }
 
-        /* 小猫图片样式 */
         .cats {
             position: absolute;
             bottom: 0;
@@ -80,7 +78,6 @@
             object-fit: contain;
         }
 
-        /* 热力图容器样式 */
         .heatmap-container {
             max-width: 800px;
             margin: 40px auto;
@@ -135,7 +132,6 @@
         <p>Welcome to the world of musical milestones! This website offers a comprehensive exploration of the top 10,000 Spotify songs that have defined popular music from the 1950s to the present day. With songs spanning across genres, eras, and cultures, we aim to showcase the most iconic hits that have shaped the music landscape.</p>
         <p>Whether you're a music enthusiast, a researcher, or just curious about the history of chart-topping hits, this platform will provide you with a deeper understanding of musical trends and iconic artists.</p>
 
-        <!-- 小猫图片横向排列 -->
         <div class="cats">
             <img src="2.png" alt="Cat 2">
             <img src="3.png" alt="Cat 3">
@@ -145,7 +141,6 @@
         </div>
     </div>
 
-    <!-- 热力图部分 -->
     <div class="heatmap-container">
         <h2>Top 50 Most Popular Albums Heatmap</h2>
         <div id="heatmap"></div>
@@ -194,7 +189,7 @@
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            .attr("transform", translate(${margin.left},${margin.top}));
+            .attr("transform", `translate(${margin.left},${margin.top})`);
 
         svg.selectAll("rect")
             .data(data)
@@ -211,27 +206,24 @@
                 return colorScale(d.popularity);
             });
 
-                svg.append("g")
+        svg.append("g")
             .call(d3.axisLeft(yScale).tickSize(0))
             .selectAll("text")
-            .style("font-size", "8px"); // 缩小 y 轴字体大小
+            .style("font-size", "8px");
 
-        // 添加颜色条（Color Legend）
-        const legendHeight = height; // 颜色条高度与热力图对齐
-        const legendWidth = 20;      // 颜色条宽度
+        const legendHeight = height;
+        const legendWidth = 20;
 
         const legendScale = d3.scaleLinear()
-            .domain([84, 94]) // 与颜色比例尺相同的范围
-            .range([legendHeight, 0]); // 映射到颜色条的高度
+            .domain([84, 94])
+            .range([legendHeight, 0]);
 
         const legendAxis = d3.axisRight(legendScale)
-            .ticks(5) // 刻度数量
-            .tickFormat(d => d); // 格式化刻度值
+            .ticks(5);
 
         const legend = svg.append("g")
-            .attr("transform", translate(${width + 40}, 0)); // 调整颜色条的位置，右移以避免数字被挡住
+            .attr("transform", `translate(${width + 40}, 0)`);
 
-        // 绘制颜色条的渐变色块
         legend.selectAll("rect")
             .data(d3.range(legendHeight))
             .enter()
@@ -242,14 +234,12 @@
             .attr("height", 1)
             .style("fill", d => colorScale(legendScale.invert(d)));
 
-        // 绘制颜色条的刻度
         legend.append("g")
-            .attr("transform", translate(${legendWidth + 5}, 0)) // 右移刻度以避免数字被挡住
+            .attr("transform", `translate(${legendWidth + 5}, 0)`)
             .call(legendAxis)
             .selectAll("text")
-            .style("font-size", "8px"); // 缩小颜色条刻度字体
-
-
+            .style("font-size", "8px");
     </script>
 </body>
 </html>
+
