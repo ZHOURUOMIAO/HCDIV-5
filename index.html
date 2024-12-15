@@ -82,12 +82,12 @@
 
         /* 热力图容器样式 */
         .heatmap-container {
-            width: 100%; /* 改为占满宽度 */
+            max-width: 800px;
             margin: 40px auto;
-            padding: 0; /* 移除内边距，避免遮挡 */
-            background: transparent; /* 移除背景颜色 */
-            border-radius: 0; /* 移除圆角 */
-            box-shadow: none; /* 移除阴影，确保显示完整 */
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .heatmap-container h2 {
@@ -194,7 +194,7 @@
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+            .attr("transform", translate(${margin.left},${margin.top}));
 
         svg.selectAll("rect")
             .data(data)
@@ -229,7 +229,7 @@
             .tickFormat(d => d); // 格式化刻度值
 
         const legend = svg.append("g")
-            .attr("transform", `translate(${width + 40}, 0)`); // 调整颜色条的位置，右移以避免数字被挡住
+            .attr("transform", translate(${width + 40}, 0)); // 调整颜色条的位置，右移以避免数字被挡住
 
         // 绘制颜色条的渐变色块
         legend.selectAll("rect")
@@ -244,7 +244,7 @@
 
         // 绘制颜色条的刻度
         legend.append("g")
-            .attr("transform", `translate(${legendWidth + 5}, 0)`) // 右移刻度以避免数字被挡住
+            .attr("transform", translate(${legendWidth + 5}, 0)) // 右移刻度以避免数字被挡住
             .call(legendAxis)
             .selectAll("text")
             .style("font-size", "8px"); // 缩小颜色条刻度字体
@@ -253,5 +253,3 @@
     </script>
 </body>
 </html>
-
-
