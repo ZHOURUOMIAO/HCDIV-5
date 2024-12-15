@@ -64,6 +64,23 @@
             text-align: center; /* 居中对齐文字内容 */
         }
 
+        /* 小猫图片样式 */
+        .cats {
+            position: absolute;
+            bottom: 0; /* 使小猫固定在标题区域的最下方 */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex; /* 横向排列 */
+            justify-content: center; /* 居中显示 */
+            gap: 10px; /* 小猫之间的间距 */
+            z-index: 2; /* 确保小猫显示在内容前 */
+        }
+
+        .cats img {
+            height: 120px; /* 小猫高度 */
+            object-fit: contain;
+        }
+
         /* 热力图容器样式 */
         .heatmap-container {
             max-width: 800px;
@@ -121,6 +138,15 @@
         <p>Welcome to the world of musical milestones! This website offers a comprehensive exploration of the top 10,000 Spotify songs that have defined popular music from the 1950s to the present day. With songs spanning across genres, eras, and cultures, we aim to showcase the most iconic hits that have shaped the music landscape.</p>
         
         <p>Whether you're a music enthusiast, a researcher, or just curious about the history of chart-topping hits, this platform will provide you with a deeper understanding of musical trends and iconic artists.</p>
+
+        <!-- 小猫图片横向排列 -->
+        <div class="cats">
+            <img src="2.png" alt="Cat 2">
+            <img src="3.png" alt="Cat 3">
+            <img src="4.png" alt="Cat 4">
+            <img src="5.png" alt="Cat 5">
+            <img src="6.png" alt="Cat 6">
+        </div>
     </div>
 
     <!-- 热力图部分 -->
@@ -152,12 +178,12 @@
 
         const data = songs.map((song, index) => ({
             song: song,
-            popularity: 94 - index * 0.2 // 平滑递减
+            popularity: 94 - index * 0.2
         }));
 
         const margin = { top: 20, right: 60, bottom: 20, left: 120 },
-              width = 600, // 图表宽度
-              height = 900; // 图表高度
+              width = 600,
+              height = 900;
 
         const colorScale = d3.scaleSequential()
             .domain([84, 94])
@@ -183,12 +209,7 @@
             .attr("y", d => yScale(d.song))
             .attr("width", width)
             .attr("height", yScale.bandwidth())
-            .attr("fill", d => {
-                if (d.song === "After Hours") return colorScale(92.9);     // 第6行颜色调整
-                if (d.song === "Unorthodox j...") return colorScale(92.3); // 第9行颜色调整
-                if (d.song === "Hybrid Theor...") return colorScale(91.6); // 第13行颜色调整
-                return colorScale(d.popularity); // 其他行默认颜色
-            });
+            .attr("fill", d => colorScale(d.popularity));
 
         svg.append("g")
             .call(d3.axisLeft(yScale).tickSize(0))
@@ -202,7 +223,7 @@
             .domain([84, 94])
             .range([legendHeight, 0]);
 
-        const legendAxis = d3.axisRight(legendScale).ticks(5).tickFormat(d => d);
+        const legendAxis = d3.axisRight(legendScale).ticks(5);
 
         const legend = svg.append("g")
             .attr("transform", `translate(${width + 20}, 0)`);
@@ -218,12 +239,12 @@
             .style("fill", d => colorScale(legendScale.invert(d)));
 
         legend.append("g")
-            .attr("class", "legend")
             .attr("transform", `translate(${legendWidth}, 0)`)
             .call(legendAxis);
     </script>
 </body>
 </html>
+
 
 
 </html>
