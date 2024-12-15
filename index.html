@@ -229,7 +229,7 @@
             .tickFormat(d => d); // 格式化刻度值
 
         const legend = svg.append("g")
-            .attr("transform", `translate(${width + 30}, 0)`); // 调整颜色条与热力图右侧对齐
+            .attr("transform", `translate(${width + 40}, 0)`); // 调整颜色条的位置，右移以避免数字被挡住
 
         // 绘制颜色条的渐变色块
         legend.selectAll("rect")
@@ -244,10 +244,11 @@
 
         // 绘制颜色条的刻度
         legend.append("g")
-            .attr("transform", `translate(${legendWidth}, 0)`)
+            .attr("transform", `translate(${legendWidth + 5}, 0)`) // 右移刻度以避免数字被挡住
             .call(legendAxis)
             .selectAll("text")
             .style("font-size", "8px"); // 缩小颜色条刻度字体
+
     </script>
 </body>
 </html>
