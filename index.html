@@ -140,18 +140,34 @@
 
         <iframe src="test5.html"></iframe>
 
-       <iframe src="test.html" style="width: 100%; height: 800px; border: none; margin-top: -150px;"></iframe>
+        <iframe src="test.html" style="width: 100%; height: 800px; border: none; margin-top: -150px;"></iframe>
         
-        <!-- 修改后的标题 -->
+        <!-- 标题 -->
         <div style="width: 900px; text-align: center; color: #107f79; font-size: 1.2em; font-weight: bold; margin: 10px auto; margin-left: -5px; margin-top: -200px;">
             Comparison of the number of singers in each score range in the top 50 songs
-        </div>        
+        </div>
+
+        <!-- 新增分隔线，放在标题下方 -->
+        <div style="
+        width: 100%; 
+        height: 2px; 
+        background: linear-gradient(to bottom, rgba(211, 211, 211, 0.5), rgba(211, 211, 211, 0.2));
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+        position: relative; /* 设置为相对定位 */
+        z-index: 10; /* 确保分隔线在最上方 */
+        margin: 20px 0;">
+        </div>
+
 
         <iframe src="test2.html" style="width: 100%; height: 800px; border: none; margin-top: 50px; margin-bottom: 20px;"></iframe>
+
+        <!-- 原本的分隔线 -->
         <div style="width: 100%; height: 2px; background: linear-gradient(to bottom, rgba(211, 211, 211, 0.5), rgba(211, 211, 211, 0.2)); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); margin: 0;"></div>
+
         <div style="width: 900px; text-align: center; color: #107f79; font-size: 2.02em; font-weight: bold; margin: 50px auto 20px;">
             Nationality distribution of the top 50 most popular singers
         </div>        
+
         <iframe src="test4.html" style="
         width: 80%; 
         height: 625px; 
@@ -161,7 +177,8 @@
         position: relative; 
         left: 50px;
         "></iframe>
-            <div style="
+
+        <div style="
         max-width: 1000px; 
         margin: 10px auto 20px; 
         padding: 10px; 
@@ -173,8 +190,9 @@
         background-color: #f8f8f8; 
         border-radius: 8px; 
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    ">            This nationality distribution map shows that the top 50 most popular singers in the world are mainly from the United States and the United Kingdom. The number of American singers is particularly prominent, reflecting its leading position in pop music and diverse styles. As the birthplace of pop music and rock, the United Kingdom still maintains a strong influence. There are fewer representative singers from other European countries and Asia.
+        ">This nationality distribution map shows that the top 50 most popular singers in the world are mainly from the United States and the United Kingdom. The number of American singers is particularly prominent, reflecting its leading position in pop music and diverse styles. As the birthplace of pop music and rock, the United Kingdom still maintains a strong influence. There are fewer representative singers from other European countries and Asia.
         </div>
+
         <div class="thankyou-title">Thank You!</div>
 
         <div class="image-gallery">
@@ -187,7 +205,8 @@
     </div>
 
     <footer>
-        <p>&copy; Produced by Zhou Ruomiao(1009611),Wang Keyu(1009694).</p>
+        <p>&copy; Produced by Zhou Ruomiao(1009611), Wang Keyu(1009694).</p>
     </footer>
 </body>
 </html>
+
